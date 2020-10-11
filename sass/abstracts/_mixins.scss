@@ -1,0 +1,75 @@
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+//
+//
+//MEDIA QUERY MANAGER
+//
+//
+
+/*
+0 - 600px:       Phone
+600px - 900px:   Tablet portrait
+900px - 1200px:  Tablet landscape
+1200px - 1800px: Our normal style goes here
+1800px + :       Big desktop
+
+// $breakpoint arguement choices: 
+1. phone
+2. tab-port
+3. tab-land
+4. big-desktop
+*/
+
+// We should use em in media query and 1em equals the user browser font size and by default it is 16px;
+// ORDER: Base + Typography > General Layout + Grid > Page Layout + Components
+
+/*@mixin respond-phone {
+    @media (max-width: 600px) {
+        @content
+    }
+}
+*/
+
+@mixin respond($breakpoint) {
+    @if $breakpoint==phone {
+        @media (max-width: 37.5em) {
+            //600px = 37.5em
+            @content
+        }
+        ;
+    }
+    @if $breakpoint==tab-port {
+        @media (max-width: 56.25em) {
+            //900px = 56.25em
+            @content
+        }
+        ;
+    }
+    @if $breakpoint==tab-land {
+        @media (max-width: 75em) {
+            //1200px = 75em
+            @content
+        }
+        ;
+    }
+    @if $breakpoint==big-desktop {
+        @media (min-width: 112.5em) {
+            //1800px = 112.5em
+            @content
+        }
+        ;
+    }
+}
